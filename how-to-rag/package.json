@@ -1,0 +1,22 @@
+{
+  "name": "burlins-commandments",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@langchain/anthropic": "^0.3.15",
+    "@langchain/community": "^0.3.34",
+    "@langchain/core": "^0.3.42",
+    "@langchain/openai": "^0.4.4",
+    "@langchain/textsplitters": "^0.1.0",
+    "chromadb": "^1.10.5",
+    "dotenv": "^16.4.7",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "pdf-parse": "^1.1.1",
+    "url": "^0.11.4"
+  }
+}
