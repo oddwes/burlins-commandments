@@ -1,0 +1,89 @@
+# Kokoro TTS Docker Setup Guide
+
+This guide provides instructions for using the Kokoro TTS (Text-to-Speech) model with Docker. The image is pre-built and available on GitHub Container Registry (GHCR).
+
+## Quick Start
+
+1. Create a `.env` file with your Hugging Face token:
+```bash
+echo "HUGGING_FACE_TOKEN=your_token_here" > .env
+```
+
+Replace `your_token_here` with your actual Hugging Face token. You can get a token from [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens).
+
+2. Run the container using the pre-built image:
+```bash
+docker run -p 7860:7860 --env-file .env ghcr.io/burlin/kokoro-tts:latest
+```
+
+3. Access the web interface at:
+```
+http://localhost:7860
+```
+
+You should see the Kokoro TTS web interface where you can enter text and generate speech.
+
+## Building from Source (Optional)
+
+If you need to build the image locally or make modifications, follow these steps:
+
+1. Clone this repository:
+```bash
+git clone https://github.com/burlin/kokoro-tts.git
+cd kokoro-tts
+```
+
+2. Create a `.env` file with your Hugging Face token:
+```bash
+echo "HUGGING_FACE_TOKEN=your_token_here" > .env
+```
+
+3. Build the Docker image:
+```bash
+docker build -t kokoro-tts .
+```
+
+4. Run the container:
+```bash
+docker run -p 7860:7860 --env-file .env kokoro-tts
+```
+
+## Troubleshooting
+
+### Container Crashes on Startup
+
+- Check the logs with `docker logs [container_id]`
+- Ensure your Hugging Face token is correct and has read permissions
+- Verify that the container can access the internet to download model weights
+
+### API Calls Not Working
+
+- Make sure you're using the correct endpoint `/api/predict`
+- Check if your JSON payload format is correct
+- Verify that the container is running and accessible
+
+## Deployment to Google Cloud (Optional)
+
+To deploy to Google Cloud Run:
+
+1. Tag the image for Google Container Registry:
+   ```bash
+   docker tag kokoro-tts gcr.io/YOUR_PROJECT_ID/kokoro-tts
+   ```
+
+2. Push to Google Container Registry:
+   ```bash
+   docker push gcr.io/YOUR_PROJECT_ID/kokoro-tts
+   ```
+
+3. Deploy to Cloud Run:
+   ```bash
+   gcloud run deploy kokoro-tts \
+     --image gcr.io/YOUR_PROJECT_ID/kokoro-tts \
+     --platform managed \
+     --allow-unauthenticated \
+     --memory 2Gi \
+     --cpu 2
+   ```
+
+Replace `YOUR_PROJECT_ID` with your Google Cloud project ID.
