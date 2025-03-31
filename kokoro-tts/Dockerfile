@@ -18,8 +18,10 @@ RUN pip install --no-cache-dir --upgrade pip wheel setuptools
 RUN pip install --no-cache-dir \
     numpy \
     scipy \
+    && pip install --no-cache-dir \
     torch --index-url https://download.pytorch.org/whl/cpu \
     torchaudio --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir \
     soundfile \
     huggingface_hub \
     python-dotenv \
