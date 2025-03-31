@@ -5,10 +5,12 @@ on:
     branches: [ "main" ]
     paths:
       - 'kokoro-tts/**'
+      - '.github/workflows/kokoro-docker-build.yml'
   pull_request:
     branches: [ "main" ]
     paths:
       - 'kokoro-tts/**'
+      - '.github/workflows/kokoro-docker-build.yml'
   workflow_dispatch:
     inputs:
       directory:
